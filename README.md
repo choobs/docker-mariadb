@@ -1,5 +1,7 @@
 # Choobs MariaDB Docker Image #
 
+[Hosted on the Docker Hub](https://hub.docker.com/r/choobs/mariadb/)
+
 ## Available Tags ##
 
 - `pinba`, `latest`
