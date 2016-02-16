@@ -6,19 +6,21 @@ apk add --update alpine-sdk mariadb-dev protobuf-dev judy-dev@testing libtool li
 cd /root
 
 git clone --depth 1 git://dev.alpinelinux.org/aports
-wget -O - https://github.com/tony2001/pinba_engine/archive/RELEASE_1_1_0.tar.gz | tar -xvzf -
+wget -O - https://github.com/tony2001/pinba_engine/archive/RELEASE_1_1_0.tar.gz | tar -xzf -
 
 cd /root/aports/main/mariadb/
 abuild -Fq fetch
 abuild -Fq unpack
 abuild -Fq prepare
 
-cp -r /usr/include/mysql/* /root/aports/main/mariadb/src/mariadb-10.1.11/include/
+MYSQL_SRC=`find "$PWD/src" -maxdepth 1 -type d -name "mariadb*"`
+
+cp -r /usr/include/mysql/* "$MYSQL_SRC/include/"
 
 cd /root/pinba_engine-RELEASE_1_1_0/
 
 ./buildconf.sh 
-./configure --with-mysql=/root/aports/main/mariadb/src/mariadb-10.1.11/ --libdir=/usr/lib/mysql/plugin
+./configure --with-mysql="$MYSQL_SRC/" --libdir=/usr/lib/mysql/plugin
 make install
 
 cat > /usr/lib/mysql/plugin/pinba.ini << EOF
