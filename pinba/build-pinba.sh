@@ -47,3 +47,4 @@ apk del mariadb-dev
 apk del protobuf-dev 
 
 rm -rf /var/cache/apk/*
+rm -rf /var/cache/distfiles/*
