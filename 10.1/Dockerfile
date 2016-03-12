@@ -1,20 +1,13 @@
 FROM alpine:latest
 MAINTAINER Erik DeLamarter <erik.delamarter@choobs.com>
 
-RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk add --update \
 		bash \
-		judy@testing \
-		libevent \
 		mariadb \
 		mariadb-client \
-		protobuf \
 		pwgen \
 		tzdata \
 		&& rm -rf /var/cache/apk/*
-
-COPY build-pinba.sh /
-RUN	/build-pinba.sh
 
 RUN	mkdir -p /var/run/mysqld && \
 		chown mysql:mysql /var/run/mysqld && \
@@ -29,5 +22,5 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 3306 30002
+EXPOSE 3306
 CMD ["mysqld"]

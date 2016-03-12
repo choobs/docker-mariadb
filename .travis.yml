@@ -1,0 +1,16 @@
+language: bash
+services: docker
+
+env:
+  - TAG=10.1
+  - TAG=pinba
+
+before_script:
+  - cd "$TAG"
+  - image="choobs/mariadb:$TAG"
+
+script:
+  - docker build -t "$image" .
+
+after_script:
+  - docker images
