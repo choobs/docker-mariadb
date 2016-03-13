@@ -5,7 +5,7 @@
 - [`10.1`, `latest` (10.1/Dockerfile)](https://github.com/choobs/docker-mariadb/blob/master/10.1/Dockerfile)
 - [`pinba` (pinba/Dockerfile)](https://github.com/choobs/docker-mariadb/blob/master/pinba/Dockerfile)
 
-[![](https://badge.imagelayers.io/choobs/mariadb:pinba.svg)](https://imagelayers.io/?images=choobs/mariadb:pinba 'Get your own badge on imagelayers.io') [![Docker Stars](https://img.shields.io/docker/stars/choobs/mariadb.svg?style=flat-square)](https://hub.docker.com/r/choobs/mariadb/) [![Docker Pulls](https://img.shields.io/docker/pulls/choobs/mariadb.svg?style=flat-square)](https://hub.docker.com/r/choobs/mariadb/)
+[![](https://badge.imagelayers.io/choobs/mariadb:pinba.svg)](https://imagelayers.io/?images=choobs/mariadb:pinba 'Get your own badge on imagelayers.io') [![Docker Stars](https://img.shields.io/docker/stars/choobs/mariadb.svg?style=flat-square)](https://hub.docker.com/r/choobs/mariadb/) [![Docker Pulls](https://img.shields.io/docker/pulls/choobs/mariadb.svg?style=flat-square)](https://hub.docker.com/r/choobs/mariadb/) [![Build Status](https://travis-ci.org/choobs/docker-mariadb.svg?branch=master)](https://travis-ci.org/choobs/docker-mariadb)
 
 ## Information ##
 
