@@ -1,0 +1,8 @@
+{
+  "require-dev": {
+    "phpunit/Dbunit": "*"
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}
