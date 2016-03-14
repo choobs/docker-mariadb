@@ -58,17 +58,12 @@ if [ "$1" = 'mysqld' ]; then
 			CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
 			GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 			DROP DATABASE IF EXISTS test ;
-			-- Pinba plugin install and setup
-			INSTALL PLUGIN pinba SONAME 'libpinba_engine.so';
-			CREATE DATABASE pinba;
 			FLUSH PRIVILEGES ;
 		EOSQL
 
 		if [ ! -z "$MYSQL_ROOT_PASSWORD" ]; then
 			mysql+=( -p"${MYSQL_ROOT_PASSWORD}" )
 		fi
-
-		"${mysql[@]}" pinba < /usr/local/share/pinba_engine/default_tables.sql
 
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
@@ -95,10 +90,11 @@ if [ "$1" = 'mysqld' ]; then
 			esac
 			echo
 		done
-		
-		kill -s TERM "$pid"
-		sleep 10
-		kill -s KILL "$pid"
+
+		if ! kill -s TERM "$pid" || ! wait "$pid"; then
+			echo >&2 'MySQL init process failed.'
+			exit 1
+		fi
 
 		echo
 		echo 'MySQL init process done. Ready for start up.'
