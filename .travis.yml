@@ -15,7 +15,7 @@ before_script:
   - image="choobs/mariadb:$TAG"
   - docker build -t "$image" .
   - docker images
-  - docker run -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=test --name db "$image"
+  - docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=test --name db "$image"
   - docker ps -a
   - composer self-update
   - composer install --no-interaction --prefer-source --dev
