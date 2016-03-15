@@ -1,7 +1,6 @@
 <?php
 
-
-class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
+abstract class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
 {
     /**
      *
@@ -61,16 +60,22 @@ class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
 
     protected function getConnection()
     {
+				static $retries = 0;
+			
         if ($this->conn === null) {
-            try {
-                if (self::$pdo == null) {
-                    self::$pdo = new PDO('mysql:dbname=test;host=localhost', 'root', 'root');;
-                }
-                $this->conn = $this->createDefaultDBConnection(self::$pdo, 'db_testing');
-            } catch (PDOException $e) {
-                echo $e->getMessage();
+            if (self::$pdo == null) {
+								do {
+										try {
+												self::$pdo = new PDO( $GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+										}
+									  catch(PDOException $e) {
+												$retries++;
+												sleep(1);
+												if($retries > 15) { throw $e; }
+										}
+								} while(self::$pdo == null);
             }
-
+						$this->conn = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_DBNAME']);													
         }
         return $this->conn;
     }
