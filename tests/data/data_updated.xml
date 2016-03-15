@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="test_table">
+        <column>id</column>
+        <column>content</column>
+        <row>
+            <value>1</value>
+            <value>Maria DB</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>Docker Test Updated</value>
+        </row>
+    </table>
+</dataset>
