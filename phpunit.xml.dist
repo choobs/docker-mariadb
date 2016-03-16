@@ -18,7 +18,6 @@
     </testsuites>
 
     <php>
-        <ini name="display_errors" value="true"/>
         <var name="DB_DSN" value="mysql:dbname=test;host=192.168.99.100"/>
         <var name="DB_USER" value="root"/>
         <var name="DB_PASSWD" value="secret"/>
