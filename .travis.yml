@@ -1,4 +1,17 @@
-language: bash
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
+
 services: docker
 
 env:
@@ -6,11 +19,16 @@ env:
   - TAG=pinba
 
 before_script:
+  - composer self-update
+  - composer install --no-interaction --prefer-source --dev
   - cd "$TAG"
   - image="choobs/mariadb:$TAG"
+  - docker build -t "$image" .
+  - docker run -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=test -p 3306:3306 "$image"
+  #  check mysql state
 
 script:
-  - docker build -t "$image" .
+  - ./vendor/bin/phpunit
 
 after_script:
   - docker images
