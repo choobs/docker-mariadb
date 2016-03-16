@@ -60,22 +60,23 @@ abstract class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
 
     protected function getConnection()
     {
-				static $retries = 0;
-			
+        static $retries = 0;
+
         if ($this->conn === null) {
             if (self::$pdo == null) {
-								do {
-										try {
-												self::$pdo = new PDO( $GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
-										}
-									  catch(PDOException $e) {
-												$retries++;
-												sleep(1);
-												if($retries > 15) { throw $e; }
-										}
-								} while(self::$pdo == null);
+                do {
+                    try {
+                        self::$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD']);
+                    } catch (PDOException $e) {
+                        $retries++;
+                        sleep(1);
+                        if ($retries > 15) {
+                            throw $e;
+                        }
+                    }
+                } while (self::$pdo == null);
             }
-						$this->conn = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_DBNAME']);													
+            $this->conn = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_DBNAME']);
         }
         return $this->conn;
     }
@@ -85,7 +86,8 @@ abstract class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
         return $this->createXMLDataSet(__DIR__ . '/data/data.xml');
     }
 
-    protected function loadDataSet() {
+    protected function loadDataSet()
+    {
         // set the new data set
         $this->getDatabaseTester()->setDataSet($this->getDataSet());
         // adds rows whenever setup is called
