@@ -64,9 +64,9 @@ class DatabaseFixtureTest extends PHPUnit_Extensions_Database_TestCase
         if ($this->conn === null) {
             try {
                 if (self::$pdo == null) {
-                    self::$pdo = new PDO( $GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'] );
+                    self::$pdo = new PDO('mysql:dbname=test;host=localhost', 'root', 'root');;
                 }
-                $this->conn = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_DBNAME']);
+                $this->conn = $this->createDefaultDBConnection(self::$pdo, 'db_testing');
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }

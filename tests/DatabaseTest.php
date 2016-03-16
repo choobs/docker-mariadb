@@ -1,6 +1,6 @@
 <?php
 
-include_once 'DatabaseFixtureTestCase.php';
+require 'DatabaseFixtureTest.php';
 
 class DatabaseTest extends DatabaseFixtureTest
 {
