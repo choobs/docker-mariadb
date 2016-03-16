@@ -1,7 +1,5 @@
 <?php
 
-require 'DatabaseFixtureTest.php';
-
 class DatabaseTest extends DatabaseFixtureTest
 {
     function testRead()
