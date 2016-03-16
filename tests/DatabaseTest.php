@@ -2,6 +2,16 @@
 
 class DatabaseTest extends DatabaseFixtureTest
 {
+
+    function testTableState()
+    {
+        $queryTable = $this->getConnection()->createQueryTable(
+            'test_table', 'SELECT * FROM test_table'
+        );
+        $expectedTable = $this->getDataSet()->getTable("test_table");
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
     function testRead()
     {
         $conn = $this->getConnection()->getConnection();
@@ -33,15 +43,6 @@ class DatabaseTest extends DatabaseFixtureTest
         $query = $conn->query('SELECT * FROM test_table');
         $results = $query->fetchAll(PDO::FETCH_COLUMN);
         $this->assertEquals(2, count($results));
-    }
-
-    function testTableState()
-    {
-        $queryTable = $this->getConnection()->createQueryTable(
-            'test_table', 'SELECT * FROM test_table'
-        );
-        $expectedTable = $this->getDataSet()->getTable("test_table");
-        $this->assertTablesEqual($expectedTable, $queryTable);
     }
 
     function testInsert()
