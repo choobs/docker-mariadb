@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnFailure="false"
+        syntaxCheck="false"
+>
+
+    <testsuites>
+        <testsuite name="Maria DB Docker Test">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <!--<ini name="display_errors" value="true"/>-->
+        <var name="DB_DSN" value="mysql:dbname=test;host=localhost"/>
+        <var name="DB_USER" value="root"/>
+        <var name="DB_PASSWD" value="secret"/>
+        <var name="DB_DBNAME" value="test"/>
+    </php>
+</phpunit>
