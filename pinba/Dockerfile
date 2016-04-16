@@ -1,12 +1,15 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER Erik DeLamarter <erik.delamarter@choobs.com>
+
+ENV MARIADB_MAJOR 10.1
+ENV MARIADB_VERSION 10.1.13-r0
 
 RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk add --update \
 		bash \
 		judy@testing \
 		libevent \
-		mariadb \
+		mariadb=$MARIADB_VERSION \
 		mariadb-client \
 		protobuf \
 		pwgen \

@@ -2,4 +2,5 @@
 bin/
 composer.lock
 composer.phar
+phpunit.phar
 vendor/

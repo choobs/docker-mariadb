@@ -1,9 +1,12 @@
-FROM alpine:latest
+FROM alpine:edge
 MAINTAINER Erik DeLamarter <erik.delamarter@choobs.com>
+
+ENV MARIADB_MAJOR 10.1
+ENV MARIADB_VERSION 10.1.13-r0
 
 RUN apk add --update \
 		bash \
-		mariadb \
+		mariadb=$MARIADB_VERSION \
 		mariadb-client \
 		pwgen \
 		tzdata \
