@@ -1,12 +1,18 @@
 #!/bin/bash
 set -ex
 
-apk add --update alpine-sdk mariadb-dev protobuf-dev judy-dev@testing libtool libevent-dev automake autoconf make
+apk add --update alpine-sdk mariadb-dev protobuf-dev libtool libevent-dev automake autoconf make
 
 cd /root
 
 git clone --depth 1 git://dev.alpinelinux.org/aports
 wget -O - https://github.com/tony2001/pinba_engine/archive/RELEASE_1_1_0.tar.gz | tar -xzf -
+
+tar -xzf Judy-1.0.5.tar.gz
+cd judy-1.0.5
+./configure
+make check
+make install
 
 cd /root/aports/main/mariadb/
 abuild -Fq fetch
@@ -39,7 +45,6 @@ rm -r /root/pinba_engine-RELEASE_1_1_0
 apk del alpine-sdk 
 apk del autoconf
 apk del automake
-apk del judy-dev
 apk del libtool
 apk del libevent-dev
 apk del make

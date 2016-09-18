@@ -8,7 +8,6 @@ RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/
 RUN apk add --update \
 		bash \
 		gosu@testing \
-		judy@testing \
 		libevent \
 		mariadb=$MARIADB_VERSION \
 		mariadb-client \
@@ -17,12 +16,13 @@ RUN apk add --update \
 		tzdata \
 		&& rm -rf /var/cache/apk/*
 
-COPY build-pinba.sh /
+COPY	Judy-1.0.5.tar.gz /root/
+COPY	build-pinba.sh /
 RUN	/build-pinba.sh
 
 RUN	mkdir -p /var/run/mysqld && \
-		chown mysql:mysql /var/run/mysqld && \
-		mkdir -p /etc/mysql/conf.d
+	chown mysql:mysql /var/run/mysqld && \
+	mkdir -p /etc/mysql/conf.d
 
 COPY my.cnf /etc/mysql/
 
